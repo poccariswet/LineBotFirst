@@ -39,9 +39,8 @@ func main() {
                 case *linebot.TextMessage:
                   fmt.Println("hoge5")
                     source := event.Source
-                    fmt.Println(source)
+                    fmt.Println(source.Type)
                     if source.Type == linebot.EventSourceTypeRoom {
-
                         if resMessage := getResMessage(message.Text); resMessage != "" {
                             postMessage := linebot.NewTextMessage(resMessage)
                             if _, err = bot.ReplyMessage(event.ReplyToken, postMessage).Do(); err != nil {
