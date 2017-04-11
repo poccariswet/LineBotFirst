@@ -39,8 +39,8 @@ func main() {
                 case *linebot.TextMessage:
                     source := event.Source
                     if source.Type == linebot.EventSourceTypeRoom {
+                      fmt.Println("hoge4")
                         if resMessage := getResMessage(message.Text); resMessage != "" {
-                          fmt.Println("hoge2")
                             postMessage := linebot.NewTextMessage(resMessage)
                             if _, err = bot.ReplyMessage(event.ReplyToken, postMessage).Do(); err != nil {
                                 fmt.Println("hoge3")
@@ -59,7 +59,7 @@ func main() {
 
 func getResMessage(reqMessage string) (message string) {
     resMessages := []string{"ねぇ〜〜","ねぇ、聞いて！！","おいっ！","タバコ吸ってくるわ","二郎行こうぜ〜","カビパンばかうめぇ"}
-
+    fmt.Println("test hoge")
     rand.Seed(time.Now().UnixNano())
     if rand.Intn(5) == 0 {
         if math := rand.Intn(4); math != 3 {
