@@ -60,7 +60,7 @@ func main() {
 
 
 func getResMessage(reqMessage string) (message string) {
-    resMessages := []string{"ねぇ〜〜","ねぇ、聞いて！！","おいっ！","タバコ吸ってくるわ","二郎行こうぜ〜","カビパンばかうめぇ"}
+    resMessages := [3]string{"わかるわかる","それで？それで？","からの〜？"}
     fmt.Println("test hoge")
     rand.Seed(time.Now().UnixNano())
     if rand.Intn(5) == 0 {
