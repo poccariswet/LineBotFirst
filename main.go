@@ -36,10 +36,13 @@ func main() {
         for _, event := range received {
             if event.Type == linebot.EventTypeMessage {
                 switch message := event.Message.(type) {
+                  fmt.Println("hoge4")
                 case *linebot.TextMessage:
+                  fmt.Println("hoge5")
                     source := event.Source
+                    fmt.Println(source)
                     if source.Type == linebot.EventSourceTypeRoom {
-                      fmt.Println("hoge4")
+
                         if resMessage := getResMessage(message.Text); resMessage != "" {
                             postMessage := linebot.NewTextMessage(resMessage)
                             if _, err = bot.ReplyMessage(event.ReplyToken, postMessage).Do(); err != nil {
