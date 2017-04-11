@@ -34,6 +34,7 @@ func main() {
         received, err := bot.ParseRequest(c.Request)
 
         for _, event := range received {
+          fmt.Println("hoge2")
             if event.Type == linebot.EventTypeMessage {
                 switch message := event.Message.(type) {
                 case *linebot.TextMessage:
@@ -42,6 +43,7 @@ func main() {
                         if resMessage := getResMessage(message.Text); resMessage != "" {
                             postMessage := linebot.NewTextMessage(resMessage)
                             if _, err = bot.ReplyMessage(event.ReplyToken, postMessage).Do(); err != nil {
+                                fmt.Println("hoge3")
                                 log.Print(err)
                             }
                         }
