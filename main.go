@@ -70,5 +70,5 @@ func getResMessage(reqMessage string) (message string) {
             message = reqMessage + "じゃねーよ！櫻井だよ！"
         }
     }
-    return
+    return message
 }
