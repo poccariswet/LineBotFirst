@@ -6,10 +6,7 @@ import (
     "os"
 
     "github.com/gin-gonic/gin"
-    "github.com/line/line-bot-sdk-go/linebot"
-    "fmt"
-    "time"
-    "math/rand"
+    "github.com/line/line-bot-sdk-go/linebot"  // ① SDKを追加
 )
 
 func main() {
@@ -19,58 +16,43 @@ func main() {
         log.Fatal("$PORT must be set")
     }
 
+    // ② LINE bot instanceの作成
+    bot, err := linebot.New(
+        os.Getenv("ENV_LINE_SECRET"),
+        os.Getenv("ENV_LINE_TOKEN"),
+    )
+    if err != nil {
+        log.Fatal(err)
+    }
+
     router := gin.New()
     router.Use(gin.Logger())
+    router.LoadHTMLGlob("templates/*.tmpl.html")
+    router.Static("/static", "static")
 
-
-    router.POST("/hook", func(c *gin.Context) {
-        fmt.Println("hoge")
-        client := &http.Client{Timeout: time.Duration(15 * time.Second)}
-        bot, err := linebot.New(os.Getenv("ENV_LINE_SECRET"),os.Getenv("ENV_LINE_TOKEN"),linebot.WithHTTPClient(client))
-        if err != nil {
-            fmt.Println(err)
-            return
-        }
-        received, err := bot.ParseRequest(c.Request)
-
-        for _, event := range received {
-            if event.Type == linebot.EventTypeMessage {
-              fmt.Println(event.Message)
-                switch message := event.Message {
-                case *linebot.TextMessag:
-                  fmt.Println("hoge5")
-                    source := event.Source
-                    fmt.Println(source.Type)
-                    fmt.Println(linebot.EventSourceTypeRoom)
-                    if source.Type == source.Type {
-                        if resMessage := getResMessage(message.Text); resMessage != "" {
-
-                            postMessage := linebot.NewTextMessage(resMessage)
-                            if _, err = bot.ReplyMessage(event.ReplyToken, postMessage).Do(); err != nil {
-                                fmt.Println("hoge3")
-                                log.Print(err)
-                            }
-                        }
-                    }
-                }
-            }
-        }
+    router.GET("/", func(c *gin.Context) {
+        c.HTML(http.StatusOK, "index.tmpl.html", nil)
     })
+    // ③ LINE Messaging API用の Routing設定
+       router.POST("/callback", func(c *gin.Context) {
+           events, err := bot.ParseRequest(c.Request)
+           if err != nil {
+               if err == linebot.ErrInvalidSignature {
+                   log.Print(err)
+               }
+               return
+           }
+           for _, event := range events {
+               if event.Type == linebot.EventTypeMessage {
+                   switch message := event.Message.(type) {
+                   case *linebot.TextMessage:
+                       if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text)).Do(); err != nil {
+                           log.Print(err)
+                       }
+                   }
+               }
+           }
+       })
 
-    router.Run(":" + port)
-}
-
-
-func getResMessage(reqMessage string) (message string) {
-    resMessages := [3]string{"わかるわかる","それで？それで？","からの〜？"}
-    fmt.Println("test hoge")
-    rand.Seed(time.Now().UnixNano())
-    if rand.Intn(5) == 0 {
-        if math := rand.Intn(4); math != 3 {
-            message = resMessages[math];
-        } else {
-            message = reqMessage + "じゃねーよ！櫻井だよ！"
-        }
-    }
-    return message
-}
+       router.Run(":" + port)
+   }
