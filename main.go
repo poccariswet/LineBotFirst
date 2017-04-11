@@ -25,7 +25,10 @@ func main() {
 
     router.POST("/hook", func(c *gin.Context) {
         client := &http.Client{Timeout: time.Duration(15 * time.Second)}
-        bot, err := linebot.New(<Channel Secret>, <Channel Access Token>, linebot.WithHTTPClient(client))
+        bot, err := linebot.New(`
+159e31a2f4a0d18f9d8e7eea7f10ef53`,
+ `4L6B+BeJZVGyU4syjT5LJl9tzhlYbHbmIk9Q72t1b0JrevzLlceQiENBfZ40vXQXo7QKMVp+GaCBqgizgY4wu8+evXyieDq8Q36ZRzK8S8NqywUgIi4DWU5pg9Pe/xZqlJAmqp6Oi9b0IxWQ4BdPJwdB04t89/1O/w1cDnyilFU=`,
+  linebot.WithHTTPClient(client))
         if err != nil {
             fmt.Println(err)
             return
