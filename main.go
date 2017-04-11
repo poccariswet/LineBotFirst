@@ -35,6 +35,7 @@ func main() {
 
         for _, event := range received {
             if event.Type == linebot.EventTypeMessage {
+              fmt.Println(event.Message.(type))
                 switch message := event.Message.(type) {
                 case *linebot.TextMessage:
                   fmt.Println("hoge5")
@@ -43,6 +44,7 @@ func main() {
                     fmt.Println(linebot.EventSourceTypeRoom)
                     if source.Type == source.Type {
                         if resMessage := getResMessage(message.Text); resMessage != "" {
+
                             postMessage := linebot.NewTextMessage(resMessage)
                             if _, err = bot.ReplyMessage(event.ReplyToken, postMessage).Do(); err != nil {
                                 fmt.Println("hoge3")
@@ -70,6 +72,5 @@ func getResMessage(reqMessage string) (message string) {
             message = reqMessage + "じゃねーよ！櫻井だよ！"
         }
     }
-    fmt.Println("test hoge2")
     return message
 }
