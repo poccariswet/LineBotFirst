@@ -24,6 +24,7 @@ func main() {
 
 
     router.POST("/hook", func(c *gin.Context) {
+        fmt.Println("hoge")
         client := &http.Client{Timeout: time.Duration(15 * time.Second)}
         bot, err := linebot.New(os.Getenv("ENV_LINE_SECRET"),os.Getenv("ENV_LINE_TOKEN"),linebot.WithHTTPClient(client))
         if err != nil {
