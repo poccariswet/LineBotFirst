@@ -70,5 +70,6 @@ func getResMessage(reqMessage string) (message string) {
             message = reqMessage + "じゃねーよ！櫻井だよ！"
         }
     }
+    fmt.Println("test hoge2")
     return message
 }
