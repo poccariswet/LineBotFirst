@@ -36,7 +36,6 @@ func main() {
         for _, event := range received {
             if event.Type == linebot.EventTypeMessage {
                 switch message := event.Message.(type) {
-                  fmt.Println("hoge4")
                 case *linebot.TextMessage:
                   fmt.Println("hoge5")
                     source := event.Source
