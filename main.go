@@ -103,7 +103,7 @@ func main() {
                            log.Print(err)
                        }
                      default:
-                      if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("位置情報を入力してください")).Do(); err != nil{
+                      if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("位置情報を入力してください" + fmt.Sprintf("%.2f", (message.Latitude)))).Do(); err != nil{
                          log.Print(err)
                        }
                    }
