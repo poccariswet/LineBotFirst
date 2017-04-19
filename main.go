@@ -70,7 +70,7 @@ func main() {
            for _, event := range events {
                if event.Type == linebot.EventTypeMessage {
                    switch message := event.Message.(type) {
-                     fmt.Print(message)
+                     
                    case *linebot.LocationMessage:
 
                      // 緯度,経度から天気の問い合わせるためのURLを作る
