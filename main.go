@@ -74,8 +74,8 @@ func main() {
 
                      // 緯度,経度から天気の問い合わせるためのURLを作る
                     //  location, _ := event.handleLocation()
-                     lat := strconv.FormatFloat(message.Latitude, 'f', 6, 64)
-                     lon := strconv.FormatFloat(message.Longitude, 'f', 6, 64)
+                    //  lat := strconv.FormatFloat(message.Latitude, 'f', 6, 64)
+                    //  lon := strconv.FormatFloat(message.Longitude, 'f', 6, 64)
 
                      weather_url := "http://samples.openweathermap.org/data/2.5/weather?lat=35&lon=139&appid=b1b15e88fa797225412429c1c50c122a1"
 
