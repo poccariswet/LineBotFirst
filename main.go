@@ -103,9 +103,9 @@ func main() {
                         //  linebot.NewImageMessage("https://openweathermap.org/img/w/"+weather_data.Weather[0].Icon+".png", "http://openweathermap.org/img/w/"+weather_data.Weather[0].Icon+".png"),
                         //  linebot.NewTextMessage("気温 : " + fmt.Sprintf("%.2f", (weather_data.Info.Temp - 273.15))),
                         //  linebot.NewTextMessage("湿度 : " + fmt.Sprintf("%.2f", (weather_data.Info.Humidity))),
-                         ).Do(); err != nil {
-                           log.Print(err)
-                       }
+                      //    ).Do(); err != nil {
+                      //      log.Print(err)
+                      //  }
                      default:
                       if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("位置情報を入力してください")).Do(); err != nil{
                          log.Print(err)
