@@ -77,7 +77,7 @@ func main() {
                      lat := strconv.FormatFloat(message.Latitude, 'f', 6, 64)
                      lon := strconv.FormatFloat(message.Longitude, 'f', 6, 64)
 
-                     weather_url := "http://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=b1b15e88fa797225412429c1c50c122a1"
+                     weather_url := "http://samples.openweathermap.org/data/2.5/weather?lat=35&lon=139&appid=b1b15e88fa797225412429c1c50c122a1"
 
                      //天気情報の取得
                      resp, _ := http.Get(weather_url)
@@ -103,7 +103,7 @@ func main() {
                            log.Print(err)
                        }
                      default:
-                      if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("位置情報を入力してください" + fmt.Sprintf("%.2f", (weather_data.Info.Temp)))).Do(); err != nil{
+                      if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("位置情報を入力してください")).Do(); err != nil{
                          log.Print(err)
                        }
                    }
