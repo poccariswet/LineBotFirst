@@ -8,7 +8,7 @@ import(
   "net/http"
   // "net/url"
   "os"
-  // "strconv"
+  "strconv"
   "github.com/line/line-bot-sdk-go/linebot"
   "github.com/gin-gonic/gin"
 
@@ -74,10 +74,10 @@ func main() {
 
                      // 緯度,経度から天気の問い合わせるためのURLを作る
                     //  location, _ := event.handleLocation()
-                    //  lat := strconv.FormatFloat(message.Latitude, 'f', 6, 64)
-                    //  lon := strconv.FormatFloat(message.Longitude, 'f', 6, 64)
-
-                     weather_url := "http://samples.openweathermap.org/data/2.5/weather?lat=35&lon=139&appid=b1b15e88fa797225412429c1c50c122a1"
+                     lat := strconv.FormatFloat(message.Latitude, 'f', 6, 64)
+                     lon := strconv.FormatFloat(message.Longitude, 'f', 6, 64)
+                     //http://api.openweathermap.org/data/2.5/weather?lat=34&lon=140&APPID=91debaa423b62efa9378c4388fd1f69b
+                     weather_url := "http://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&APPID=91debaa423b62efa9378c4388fd1f69b"
 
                      //天気情報の取得
                      resp, _ := http.Get(weather_url)
