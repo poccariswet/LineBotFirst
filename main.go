@@ -77,9 +77,8 @@ func main() {
                     //  location, _ := event.handleLocation()
                      lat := strconv.FormatFloat(message.Latitude, 'f', 6, 64)
                      lon := strconv.FormatFloat(message.Longitude, 'f', 6, 64)
-                     fmt.Println(lat)
-                     fmt.Println(lon)
-                     //http://api.openweathermap.org/data/2.5/weather?lat=34&lon=140&APPID=91debaa423b62efa9378c4388fd1f69b
+                    //  fmt.Println(lat)
+                    //  fmt.Println(lon)
                      weather_url := "http://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&APPID=91debaa423b62efa9378c4388fd1f69b"
 
                      //天気情報の取得
@@ -93,6 +92,7 @@ func main() {
                        fmt.Println("JSON Unmarshal error:", err)
                        return
                      }
+                    //  fmt.Println(weather_data.Weather[0].Icon)
 
                      //メッセージの送信
                           // fmt.Println("%.2f", (weather_data.Info.Temp - 273.15))
@@ -100,7 +100,7 @@ func main() {
                        if _, err = bot.ReplyMessage(event.ReplyToken,
                          linebot.NewTextMessage("現在の天気をお知らせします。"),
                          linebot.NewTextMessage("天気 : "+ weather_data.Weather[0].Main),
-                        //  linebot.NewImageMessage("https://openweathermap.org/img/w/"+weather_data.Weather[0].Icon+".png", "http://openweathermap.org/img/w/"+weather_data.Weather[0].Icon+".png"),
+                         linebot.NewImageMessage("https://openweathermap.org/img/w/"+weather_data.Weather[0].Icon+".png", "https://openweathermap.org/img/w/"+weather_data.Weather[0].Icon+".png"),
                          linebot.NewTextMessage("気温 : " + fmt.Sprintf("%.2f", (weather_data.Info.Temp - 273.15))),
                          linebot.NewTextMessage("湿度 : " + fmt.Sprintf("%.2f", (weather_data.Info.Humidity)))).Do(); err != nil {
                            log.Print(err)
