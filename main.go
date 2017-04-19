@@ -77,6 +77,8 @@ func main() {
                     //  location, _ := event.handleLocation()
                      lat := strconv.FormatFloat(message.Latitude, 'f', 6, 64)
                      lon := strconv.FormatFloat(message.Longitude, 'f', 6, 64)
+                     fmt.Println(lat)
+                     fmt.Println(lon)
                      //http://api.openweathermap.org/data/2.5/weather?lat=34&lon=140&APPID=91debaa423b62efa9378c4388fd1f69b
                      weather_url := "http://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&APPID=91debaa423b62efa9378c4388fd1f69b"
 
