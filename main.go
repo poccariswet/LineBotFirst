@@ -70,16 +70,20 @@ func main() {
            for _, event := range events {
                if event.Type == linebot.EventTypeMessage {
                    switch message := event.Message.(type) {
+                     fmt.Print(message)
                    case *linebot.LocationMessage:
 
                      // 緯度,経度から天気の問い合わせるためのURLを作る
                     //  location, _ := event.handleLocation()
                      lat := strconv.FormatFloat(message.Latitude, 'f', 6, 64)
                      lon := strconv.FormatFloat(message.Longitude, 'f', 6, 64)
+                     fmt.Print(lat)
+                     fmt.Print(lon)
                      //http://api.openweathermap.org/data/2.5/weather?lat=34&lon=140&APPID=91debaa423b62efa9378c4388fd1f69b
                      weather_url := "http://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&APPID=91debaa423b62efa9378c4388fd1f69b"
 
                      //天気情報の取得
+                     fmt.Print(weather_url)
                      resp, _ := http.Get(weather_url)
                      defer resp.Body.Close()
                      byteArray, _ := ioutil.ReadAll(resp.Body)
