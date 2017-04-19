@@ -97,7 +97,10 @@ func main() {
                           fmt.Println(weather_data.Weather[0].Main)
                        if _, err = bot.ReplyMessage(event.ReplyToken,
                          linebot.NewTextMessage("現在の天気をお知らせします。"),
-                         linebot.NewTextMessage("天気 : "+ weather_data.Weather[0].Main)).Do(); err != nil {
+                         linebot.NewTextMessage("天気 : "+ weather_data.Weather[0].Main)),
+                         linebot.NewTextMessage("気温 : " + fmt.Sprintf("%.2f", (weather_data.Info.Temp - 273.15))),
+                         linebot.NewTextMessage("湿度 : " + fmt.Sprintf("%.2f", (weather_data.Info.Humidity))),
+                         .Do(); err != nil {
                            log.Print(err)
                        }
                         //  linebot.NewImageMessage("https://openweathermap.org/img/w/"+weather_data.Weather[0].Icon+".png", "http://openweathermap.org/img/w/"+weather_data.Weather[0].Icon+".png"),
